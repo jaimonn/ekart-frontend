@@ -1,0 +1,48 @@
+
+
+                                   ekart frontend
+
+
+    1.create new project
+    .clear all html
+    7.install bootstrap,google fonts     
+
+    8.LAZZY LOADING
+    .lazy loading helps keeps initial bundle sizes smaller
+
+    9.our module in application -app.module
+    to create new module- ng g m products --route products --module app.module  
+
+    10.component generation
+
+       ng g c products/allProducts 
+        ng g c products/viewProduct
+         ng g c products/wishlist
+          ng g c products/cart 
+
+           ng g c header
+            ng g c footer
+             ng g c pagenotfound
+
+
+   11.set path for componnets
+     >put <router-outlet>
+     >products.routing.module.ts
+
+   12.api integration
+
+     .>import httpclient module in app.module.ts
+     .create service inside product module-for api calling
+      -ng g s products/services/api
+     .inside api.service
+       -create and use http dependncy injection
+       -also create a function for (getallproducts) fetching all product details
+     .inside all-Products.component file
+       -create and use api dependncy injection
+       -crreate function for integrating api service
+       -get all product details
+
+
+       .>product searcg
+
+       ng g p products/pipes/filter   

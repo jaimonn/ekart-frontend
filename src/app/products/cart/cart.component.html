@@ -1,0 +1,167 @@
+
+<!-- empty -->
+<div class="container" *ngIf="allCart.length==0">
+    <div class="row">
+        <div class="col text-center">
+            <img src="https://www.lytmeals.in/assets/web/img/emptycart.png" alt="">
+            <h2 class="mt-5">your cart is empty</h2>
+            <button class="btn btn-dark mb-2" routerLink="">shop here</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="container"*ngIf="allCart.length!=0">
+    <div class="row">
+        <div class="col-6">
+            <!-- table -->
+            <table class="border border-2 border ">
+                <thead>
+                    <tr class="border border-3 border">
+                        <th  class="border border-2 border">Product Id</th>
+                        <th  class="border border-2 border">Name</th>
+                        <th  class="border border-2 border">image</th>
+                        <th  class="border border-2 border">quantity</th>
+                        <th  class="border border-2 border">price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+<tr  class="border border-2 border" *ngFor="let cart of allCart let i=index" >
+    <td  class="border border-2 border">{{i+1}}</td>
+    <td  class="border border-2 border">{{cart.title}}</td>
+    <td  class="border border-2 border"><img width="100%" height="100px" [src]="cart.image" alt=""></td>
+
+    <div class="d-flex flex-row">
+                <button (click)="decrementCart(cart.id)" class="btn fw-bolder">-</button>
+    <td  class="border border-2 border"><input type="text" [value]="cart.quantity" class="form-control" readonly></td>
+        <button (click)="incrementCart(cart.id)" class="btn fw-bolder">+</button>
+
+    </div>
+    <td  class="border border-2 border">{{cart.grandTotal}}</td>
+    <td  class="border border-2 border"><i class="fa-solid fa-trash fa-bounce text-danger" (click)="removeCartItem(cart.id)"></i></td>
+</tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6 card shadow my-5 p-5">
+            <h1 class="text-center fw-bolder">product details</h1>
+            <h4>Price: ${{totalPrice}}</h4>
+            <h2>Discount:30%</h2>
+            <h1>Amount Payable:${{totalPrice}}</h1>
+            <hr>
+            <div class="text-center">
+                <button class="btn btn-success m-4"data-bs-toggle="modal" data-bs-target="#staticBackdrop">CHECKOUT</button>
+
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">YOUR WISHES OF THE DAY</h5>
+                      <button (click)="modalclose()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     <h3 *ngIf="!paymentStatus" class="text-center">ENTER YOUR ADDRESS DETAILS</h3>
+               
+                     <form *ngIf="!paymentStatus" [formGroup]="addressForm" (ngSubmit)="submitform()">
+                      <div class="form-floating mb-3">
+                          <input name="username" formControlName="username" type="text" class="form-control" placeholder="Enter Your Name" required>
+                          <div *ngIf="this.addressForm.get('username')?.errors &&this.addressForm.get('username')?.touched" class="text-danger">
+                              Invalid username
+                          </div>
+                          <label>Name</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                          <input name="housenumber" formControlName="housenumber" type="text" class="form-control" placeholder="House Number" required>
+                          <div *ngIf="this.addressForm.get('housenumber')?.errors &&this.addressForm.get('housenumber')?.touched" class="text-danger">
+                              Invalid housenumber
+                          </div>
+                          <label>House Number</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                          <input name="street" formControlName="street" type="text" class="form-control" placeholder="Street Name" required>
+                          <div *ngIf="this.addressForm.get('street')?.errors &&this.addressForm.get('street')?.touched" class="text-danger">
+                              Invalid street
+                          </div>
+                          <label>Street Name</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                          <input name="state" formControlName="state" type="text" class="form-control" placeholder="State" required>
+                          <div *ngIf="this.addressForm.get('state')?.errors &&this.addressForm.get('state')?.touched" class="text-danger">
+                              Invalid state
+                          </div>
+                          <label>State</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                          <input name="pincode" formControlName="pincode" type="text" class="form-control" placeholder="Pin Code" required>
+                          <div *ngIf="this.addressForm.get('pincode')?.errors &&this.addressForm.get('pincode')?.touched" class="text-danger">
+                              Invalid pincode
+                          </div>
+                          <label>Pin Code</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                          <input name="mobilenumber" formControlName="mobilenumber" type="text" class="form-control" placeholder="Mobile Number" required>
+                          <div *ngIf="this.addressForm.get('mobilenumber')?.errors &&this.addressForm.get('mobilenumber')?.touched" class="text-danger">
+                              Invalid mobile number
+                          </div>
+                          <label>Mobile Number</label>
+                      </div>
+                      <hr>
+
+                     
+                      <div>
+                          <h2 class="text-danger">Total Amount :{{totalPrice}}</h2>
+                          <a (click)="offerClicked()" class="text-info">Offers :</a>
+                      </div>
+
+                      <!-- //discount -->
+                      <div *ngIf="offerClick && !discountStatus">
+
+                        <!-- 10% -->
+                        <img *ngIf="totalPrice<300" (click)="discount(10)" width="100px" height="100px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADhCAMAAADmr0l2AAABg1BMVEX////cACzZACvcAC7IACS/ACHRACjOACfEASPKACa9ACDUACm5AB/KACT8//+7ACH/6wD/wwD/aQbcFzT++PrOACHGAADz0dXXORbWSFb34eLPAAD+wADso6vVABb/6QDaAB/WUGHYACTVAAD5Ygr92QHUACXGABb9yAD/bgDyyc3VAA3QAB+/AAC0AAD+/vTcABXGABH/7D7rub7+9aH+/Oj80QP98Gn8nwf+swP+kAT897P94gLeP1P++tv13N/++cv/9Jr/+9788Hv8+cD88WH79JD87lD952L+5af87wD9qAX+gAj9dgb6yB/96LP+lwL71XH+8NbphY7gLEnqOx7yThb9wqb+gkfrlaD2VALma3z1QgD+n3H0bkDnOjD4ppT+s5XoJgD9zrj9dCf7zqLme4b8zEnkanftrrTomqP97t/VNUbRHDfWW2bbhY7IPEv8283ZShbXYRbWdBLYgADXfz3834n82kfTNRj7rSv+wHL94Lj/m2e4JDDVgnzIY2zKsgVEAAAWDElEQVR4nO2di1/iyJbHAyqIacoEAiiPgAEhEHwgtk9s7OnXvagzztrT99qzc2d37l5WGNDeuzu7t/fR1z99q/IglUoCJMYG/fibTzvdSajUN+fUOacqCVLUk570pCc96UlPmgo9f/F6++XLl9uHx99sTLovnuvF9i6TZZCUn8yrw+eT7pNnen64O+DCtbX9CAy58fpVNmuAyzYaq0iNBtz85sWkO3gXbRy/3dKwWq0WRFvdEdm0LlZcbbw7nnQ3XerF9htmYDodjTUKbtj53cMbjHDQKWwthoFoCpsMJKI/SOl9pHRahPvE30+6w04EB53ikorZBmAiQknvn+ydH5yelSMFVZGzg5O0+O13k+72mJIH3WCwyVA4FcKKmFUoH+x/O/3R5pvtd9BsMELuqFQniErGsoAyMZ5/P2mAYUKDDlltf39v7+BUdsFxsBSVodD/z//hK/aYS2QuVt5Hx9XmZs7nm/HJmvHN+OWfM+in3+/3DRP6UO7nHz4UIGThD1+JLnH5Pi9t5gRhaNe81AzUDx8ikT/+ev903GU0nxNmvhobBun/+eO9G7H5Y37TN/C2r87oz/3jT/eJx/2Yz/mGj5l7ln9m80/3V4F3N3MT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" alt="">
+                      <!-- 50% -->
+                    <img  *ngIf="totalPrice>500" (click)="discount(50)" width="100px" height="100px"  src="https://www.transparentpng.com/thumb/50-off/mD3qe9-50-off-clipart-photos.png" alt="">
+                    </div>
+
+
+                      <!-- Payment Button -->
+                      <div class="text-center">
+                          <button 
+                          class="btn btn-success m-4">CONFIRM</button>
+                      </div>
+
+
+
+                    </form>
+
+                    <!-- //user details -->
+         <div class="border border-2 p-3 m-3" *ngIf="paymentStatus">
+
+<h5>USER ADDRESS</h5>
+<p> Name:{{username}}</p>
+<p> House NO:{{housenumber}}</p>
+<p> Pin Code:{{pincode}}</p>
+<p> Mobile:{{phoneno}}</p>
+
+<div class="text-center">
+    <button (click)="makepay()" class="btn btn-success">Procced TO Pay</button>
+</div>
+
+<div *ngIf="proceedtoPay" class="text-center mt-3">
+
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</div>
+        </div>
+
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Understood</button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

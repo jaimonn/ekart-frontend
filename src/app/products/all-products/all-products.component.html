@@ -1,0 +1,77 @@
+<!-- <div style="margin-top: 10px;" class="banner">
+    <img width="100%" src="https://marketplace.canva.com/EAFDLUG2oE8/1/0/1600w/canva-colorful-summer-sale-promotion-banner-cx8DTKLxjQk.jpg" alt="">
+</div> -->
+<!-- https://marketplace.canva.com/EAFED0hv9G0/1/0/1600w/canva-blue-pink-modern-special-offer-sale-banner-J5VkNReQ8WA.jpg -->
+
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://i.ytimg.com/vi/XQ87b896OwM/maxresdefault.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://marketplace.canva.com/EAFDLUG2oE8/1/0/1600w/canva-colorful-summer-sale-promotion-banner-cx8DTKLxjQk.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://dealsdekho.com/wp-content/uploads/2023/01/Myntra-Upcoming-Sales.png" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+<!-- 
+        <img src="https://marketplace.canva.com/EAFDLUG2oE8/1/0/1600w/canva-colorful-summer-sale-promotion-banner-cx8DTKLxjQk.jpg" class="d-block w-100" alt="...">
+  
+        <img src="https://marketplace.canva.com/EAFDLUG2oE8/1/0/1600w/canva-colorful-summer-sale-promotion-banner-cx8DTKLxjQk.jpg" class="d-block w-100" alt="...">
+    
+        <img src="https://media.istockphoto.com/vectors/fashion-sale-banner-design-background-with-gold-special-promo-offer-vector-id1153706606" class="d-block w-100" alt="...">
+      -->
+
+
+
+
+
+
+<div class="container">
+    <h1 class="text-center bg-dark text-light m-4">OUR NEW SALE</h1>
+</div>
+
+
+
+
+
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" *ngFor="let product of allproducts | filter:searchTerm:'title' ">
+                <div style="background-color: rgb(232, 228, 221);" class="card h-100 border shadow ">
+                    <!-- Product image-->
+                    <!-- proprrty binding -->
+                    <img style="padding: 15px;border-radius: 10px;" class="card-img-top" [src]=product.image alt="..."height="200px" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{product.title}}</h5>
+                            <!-- Product price-->
+                            ${{product.price}}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"routerLink="viewproduct/{{product.id}}">View Product</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

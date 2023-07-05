@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Bree+Serif&family=Cinzel:wght@500;800&family=IBM+Plex+Mono&family=Mynerve&family=Patua+One&family=Rajdhani:wght@600&family=Secular+One&family=Sofia+Sans+Condensed&family=Tilt+Prism&display=swap');
+*{
+    /* font-family: 'Mynerve', cursive; */
+    /* font-family: 'Tilt Prism', cursive; */
+    font-family: 'IBM Plex Mono', monospace;
+}
+body{
+    background-color: rgb(238, 245, 243);
+}

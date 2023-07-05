@@ -1,0 +1,34 @@
+
+  <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" routerLink=""> <img src="https://cdn-icons-png.flaticon.com/512/3336/3336049.png" alt="" width="50" height="40">WISHMASTER</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <div class="col-4">
+                    <input (keyup)="search($event)" style="color: rgb(255, 255, 255); background-color: rgb(192, 171, 119);" type="text " placeholder="search" class="btn btn-outline-dark ">
+                  </div>
+                  <div class="col-3">
+
+                  </div>
+                  <div class="col-4">
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark me-4" routerLink="products/wishlist" type="submit">
+                        
+                            <i class="fa-sharp fa-solid fa-heart-circle-plus fa-fade text-danger"></i>
+                            Wishlist
+                           
+                        </button>
+
+                        <button class="btn btn-outline-dark "routerLink="products/cart" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartItemsCount}}</span>
+                        </button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </nav>
+
+

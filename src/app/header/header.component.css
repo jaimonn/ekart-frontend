@@ -1,0 +1,6 @@
+.navbar{
+    background-color: rgb(255, 203, 124);
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
